@@ -1,0 +1,13 @@
+version: "3.3"
+services:
+  batch:
+    container_name: batch-server
+    build:
+      context: ./docker
+    volumes:
+      - ./:/usr/batch
+      - ./docker/startup.sh:/startup.sh
+      - ./docker/etc/td-agent:/etc/td-agent
+      - ./docker/etc/rsyslog.d/syslog-fluentd.conf:/etc/rsyslog.d/syslog-fluentd.conf
+    privileged: true
+    command: bash /startup.sh
